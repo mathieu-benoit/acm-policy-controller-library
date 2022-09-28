@@ -38,8 +38,6 @@ jobs:
           gcloud components install kpt --quiet
       - name: gatekeeper
         run: |
-          cd bundles/asm-policy-v0.0.1/
-          
           cd bundles/
           BUNDLES=$(ls -d */)
           for bundle in $BUNDLES;
