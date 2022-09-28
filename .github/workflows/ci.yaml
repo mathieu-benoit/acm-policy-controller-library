@@ -39,4 +39,11 @@ jobs:
       - name: gatekeeper
         run: |
           cd bundles/asm-policy-v0.0.1/
-          kpt fn render . --truncate-output=false
+          
+          cd bundles/
+          BUNDLES=$(ls -d */)
+          for bundle in $BUNDLES;
+          do
+              echo "## kpt fn render " + $bundle
+              kpt fn render $bundle --truncate-output=false
+          done
