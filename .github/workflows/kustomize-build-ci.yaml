@@ -15,7 +15,16 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - name: kustomize build base
+      - name: kustomize build each component
         run: |
-          cd bundles/asm-policy-v0.0.1/
-          kubectl kustomize .
+          cd bundles/
+          BUNDLES=$(ls /)
+          for b in $BUNDLES;
+          do
+              echo "## kustomize build for " + $b
+              kustomize build $b/
+          done
+      - name: kustomize build all
+        run: |
+          cd bundles/
+          kustomize build .
