@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - name: kustomize build each component
+      - name: kustomize build for each component
         run: |
           cd bundles/
           BUNDLES=$(ls -d */)
@@ -36,12 +36,12 @@ jobs:
       - name: install kpt	
         run: |
           gcloud components install kpt --quiet
-      - name: gatekeeper
+      - name: kpt fn render for each component
         run: |
           cd bundles/
           BUNDLES=$(ls -d */)
           for bundle in $BUNDLES;
           do
-              echo "## kpt fn render " + $bundle
+              echo "## kpt fn render for " + $bundle
               kpt fn render $bundle --truncate-output=false
           done
