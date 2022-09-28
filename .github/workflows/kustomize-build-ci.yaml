@@ -18,7 +18,7 @@ jobs:
       - name: kustomize build each component
         run: |
           cd bundles/
-          BUNDLES=$(ls .)
+          BUNDLES=$(ls -d */)
           for bundle in $BUNDLES;
           do
               echo "## kustomize build for " + $bundle
