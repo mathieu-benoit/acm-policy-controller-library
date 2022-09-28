@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- 1.1.1_asm-ingressgateway-label.yaml
+- 1.1.2_asm-sidecar-injection.yaml
+- 1.2.1_asm-authz-policy-mesh-default-deny.yaml
+- 1.2.2_asm-authz-policy-normalization.yaml
+- 1.2.3_asm-authz-policy-safe-pattern.yaml
+- 1.3.1_asm-peer-authn-mesh-strict-mtls.yaml
+- 1.3.2_asm-peer-authn-strict-mtls.yaml
+- 1.4.1_asm-request-authn-prohibited-output-headers.yaml
