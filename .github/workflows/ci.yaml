@@ -1,4 +1,4 @@
-name: kustomize-build-ci
+name: ci
 on:
   push:
     branches:
@@ -38,5 +38,5 @@ jobs:
           gcloud components install kpt --quiet
       - name: gatekeeper
         run: |
-          cd asm-policy-v0.0.1/
+          cd bundles/asm-policy-v0.0.1/
           kpt fn render .
