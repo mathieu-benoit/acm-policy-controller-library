@@ -4,11 +4,11 @@ on:
     branches:
       - main
     paths:
-      - 'kustomize/**'
+      - 'bundles/**'
       - '.github/workflows/ci.yaml'
   pull_request:
     paths:
-      - 'kustomize/**'
+      - 'bundles/**'
       - '.github/workflows/ci.yaml'
 jobs:
   kustomize:
