@@ -39,4 +39,4 @@ jobs:
       - name: gatekeeper
         run: |
           cd bundles/asm-policy-v0.0.1/
-          kpt fn render .
+          kpt fn render . --truncate-output=false
