@@ -44,4 +44,5 @@ jobs:
           do
               echo "## kpt fn render for " + $bundle
               kpt fn render $bundle --truncate-output=false
+              kpt live apply $bundle
           done
