@@ -23,13 +23,11 @@ jobs:
           do
               echo "## kustomize build for " + $bundle
               kustomize build $bundle
-              kubectl apply -k $bundle --dry-run=client
           done
       - name: kustomize build all
         run: |
           cd bundles/
           kustomize build .
-          kubectl apply -k . --dry-run=client
   kpt:
     runs-on: ubuntu-22.04
     steps:
