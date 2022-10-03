@@ -23,11 +23,13 @@ jobs:
           do
               echo "## kustomize build for " + $bundle
               kustomize build $bundle
+              kubectl apply -k $bundle --dry-run
           done
       - name: kustomize build all
         run: |
           cd bundles/
           kustomize build .
+          kubectl apply -k . --dry-run
   kpt:
     runs-on: ubuntu-22.04
     steps:
@@ -47,17 +49,4 @@ jobs:
           do
               echo "## kpt fn render for " + $bundle
               ./kpt fn render $bundle --truncate-output=false
-          done
-      - name: create kind cluster
-        run: |
-          kind create cluster
-      - name: kpt live apply for each component
-        run: |
-          cd bundles/
-          BUNDLES=$(ls -d */)
-          for bundle in $BUNDLES;
-          do
-              echo "## kpt live apply for " + $bundle
-              ./kpt live init
-              ./kpt live apply $bundle --truncate-output=false --install-resource-group=true
           done
