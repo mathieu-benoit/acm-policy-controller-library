@@ -32,10 +32,12 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - uses: google-github-actions/setup-gcloud@v0.6.0
-      - name: install kpt	
+      - name: install kpt
         run: |
-          gcloud components install kpt --quiet
+          curl -L https://github.com/GoogleContainerTools/kpt/releases/download/v${KPT_VERSION}/kpt_linux_amd64 > kpt
+          chmod +x kpt
+        env:
+          KPT_VERSION: 1.0.0-beta.21
       - name: kpt fn render for each component
         run: |
           cd bundles/
@@ -43,7 +45,7 @@ jobs:
           for bundle in $BUNDLES;
           do
               echo "## kpt fn render for " + $bundle
-              kpt fn render $bundle --truncate-output=false
+              ./kpt fn render $bundle --truncate-output=false
           done
       - name: kpt live apply for each component
         run: |
@@ -52,5 +54,5 @@ jobs:
           for bundle in $BUNDLES;
           do
               echo "## kpt live apply for " + $bundle
-              kpt live apply $bundle --truncate-output=false --dry-run=true
+              ./kpt live apply $bundle --truncate-output=false --dry-run=true
           done
