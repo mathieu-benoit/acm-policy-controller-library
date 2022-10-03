@@ -34,6 +34,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: install kpt
         run: |
+          cd bundles/
           curl -L https://github.com/GoogleContainerTools/kpt/releases/download/v${KPT_VERSION}/kpt_linux_amd64 > kpt
           chmod +x kpt
         env:
@@ -45,7 +46,7 @@ jobs:
           for bundle in $BUNDLES;
           do
               echo "## kpt fn render for " + $bundle
-              ../kpt fn render $bundle --truncate-output=false
+              ./kpt fn render $bundle --truncate-output=false
           done
       - name: create kind cluster
         run: |
@@ -57,6 +58,6 @@ jobs:
           for bundle in $BUNDLES;
           do
               echo "## kpt live apply for " + $bundle
-              ../kpt live init
-              ../kpt live apply $bundle --truncate-output=false --dry-run=true --install-resource-group=true
+              ./kpt live init
+              ./kpt live apply $bundle --truncate-output=false
           done
