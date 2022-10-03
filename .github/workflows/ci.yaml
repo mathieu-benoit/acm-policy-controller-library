@@ -47,6 +47,9 @@ jobs:
               echo "## kpt fn render for " + $bundle
               ../kpt fn render $bundle --truncate-output=false
           done
+      - name: create kind cluster
+        run: |
+          kind create cluster
       - name: kpt live apply for each component
         run: |
           cd bundles/
