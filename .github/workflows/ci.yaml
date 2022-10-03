@@ -45,3 +45,12 @@ jobs:
               echo "## kpt fn render for " + $bundle
               kpt fn render $bundle --truncate-output=false
           done
+      - name: kpt live apply for each component
+        run: |
+          cd bundles/
+          BUNDLES=$(ls -d */)
+          for bundle in $BUNDLES;
+          do
+              echo "## kpt live apply for " + $bundle
+              kpt live apply $bundle --truncate-output=false --dry-run true
+          done
