@@ -57,5 +57,6 @@ jobs:
           for bundle in $BUNDLES;
           do
               echo "## kpt live apply for " + $bundle
+              ../kpt live init
               ../kpt live apply $bundle --truncate-output=false --dry-run=true --install-resource-group=true
           done
