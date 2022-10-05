@@ -14,21 +14,21 @@
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sPSPHostNetworkingPorts
 metadata:
-  name: policy-essentials-v2022-psp-host-network-ports
+  name: pss-baseline-v2022-host-namespaces-hostnetwork
   labels:
-    policycontroller.gke.io/bundleName: policy-essentials-v2022
+    policycontroller.gke.io/bundleName: pss-baseline-v2022
   annotations:
     policycontroller.gke.io/constraintData: |
       "{
-        bundleName: 'policy-essentials-v2022',
-        bundleDisplayName: 'Policy Essentials v2022',
-        bundleLink: 'https://github.com/GoogleCloudPlatform/acm-policy-controller-library/tree/master/bundles/policy-essentials-v2022',
-        bundleVersion: '202209.0',
-        bundleDescription: 'Use the Policy Essentials v2022 policy bundle with Anthos Policy Controller to apply Google recommended best practices to your in cluster resources.',
+        bundleName: 'pss-baseline-v2022',
+        bundleDisplayName: 'Pod Security Standards Baseline v2022',
+        bundleLink: 'https://github.com/GoogleCloudPlatform/acm-policy-controller-library/tree/master/bundles/pss-baseline-v2022',
+        bundleVersion: '202209.2',
+        bundleDescription: 'Use the Pod Security Standards Baseline v2022 policy bundle with Anthos Policy Controller to to achieve many of the protections of the Kubernetes Pod Security Standards Baseline policy.',
         controlNumbers: '[]',
         severity: 'UNASSIGNED',
-        description: 'Restricts containers from running with the `hostNetwork` flag set to `true`.',
-        remediation: 'Containers are restricted from running with `hostNetwork` set to `true`, please remove the `hostNetwork: true` from your containers.',
+        description: 'Sharing the host namespaces must be disallowed.  https://kubernetes.io/docs/concepts/security/pod-security-standards/#baseline',
+        remediation: '',
         minimumTemplateLibraryVersion: '1.11.1'
       }"
 spec:
@@ -43,5 +43,3 @@ spec:
     - kube-system
   parameters:
     hostNetwork: false
-    min: 1
-    max: 65535
